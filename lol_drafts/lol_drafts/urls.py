@@ -19,5 +19,6 @@ from discord_auth.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('oauth2/login/', AuthDiscord.as_view(), name='oauth_login')
+    path('oauth2/login/', AuthDiscord.as_view(), name='oauth_login'),
+    path('oauth2/login/redirect/', AuthDiscordRedirect.as_view(), name='oauth_login_redirect'),
 ]
