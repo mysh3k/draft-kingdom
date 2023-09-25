@@ -13,12 +13,10 @@ def auth_exchange_code(code: str):
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded'
     }
-    response = requests.post('https://discord.com/api/oauth2/token', data=data, headers=headers)
-    print(response)
-    credentials = response.json()
-    return credentials
+    response = requests.post('https://discord.com/api/oauth2/token', data=data, headers=headers).json()
+    return response
 
 def auth_get_user_data(token: str):
     headers = {'Authorization': f'Bearer {token}'}
-    response = requests.get('https://discord.com/api/v10/users/@me', headers=headers)
-    return response.json()
+    response = requests.get('https://discord.com/api/v10/users/@me', headers=headers).json()
+    return response
