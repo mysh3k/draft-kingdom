@@ -1,0 +1,13 @@
+.idea
+libs
+
+lol_drafts/.idea
+riotdraftapi/.idea
+riotdraftapi/libs
+
+lol_drafts/.idea/*
+riotdraftapi/.idea/*
+riotdraftapi/libs/*
+
+secrets.py
+lol_drafts\discord_auth\secrets.py
