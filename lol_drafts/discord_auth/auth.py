@@ -8,3 +8,9 @@ class DiscordAuthenticationBackend(BaseBackend):
         if created:
             discord_user = DiscordUser.objects.create_new_discord_user(discord_user, user)
         return discord_user
+
+    def get_user(self, user_id):
+        try:
+            return DiscordUser.objects.get(pk=user_id)
+        except DiscordUser.DoesNotExist:
+            return None

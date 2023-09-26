@@ -1,6 +1,7 @@
 import requests
 from ..secrets import client_id, client_secret
 
+
 def auth_exchange_code(code: str):
     data = {
         'client_id': client_id,
@@ -15,6 +16,7 @@ def auth_exchange_code(code: str):
     }
     response = requests.post('https://discord.com/api/oauth2/token', data=data, headers=headers).json()
     return response
+
 
 def auth_get_user_data(token: str):
     headers = {'Authorization': f'Bearer {token}'}

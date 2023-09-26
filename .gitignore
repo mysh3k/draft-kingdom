@@ -18,3 +18,4 @@ lol_drafts/lol_drafts/__pycache__/urls.cpython-310.pyc
 lol_drafts/discord_auth/__pycache__/views.cpython-310.pyc
 lol_drafts/discord_auth/__pycache__/secrets.cpython-310.pyc
 *.pyc
+.pyc

@@ -14,11 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 from discord_auth.views import *
+#from lol_drafts.discord_auth.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('oauth2/login/', AuthDiscord.as_view(), name='oauth_login'),
-    path('oauth2/login/redirect/', AuthDiscordRedirect.as_view(), name='oauth_login_redirect'),
+    path('accounts/login/', AccountLogin.as_view(), name='LoginRequiredRedirect'),
+    path('oauth2/login/', AuthDiscord.as_view(), name='AuthDiscord'),
+    path('oauth2/login/redirect/', AuthDiscordRedirect.as_view(), name='AuthDiscordRedirect'),
+    path('auth/user/', login_required(GetAuthenticatedUser.as_view()), name='GetAuthenticatedUser')
 ]

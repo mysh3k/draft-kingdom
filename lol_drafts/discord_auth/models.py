@@ -10,3 +10,6 @@ class DiscordUser(models.Model):
     global_name = models.CharField(max_length=64, null=True)
     avatar = models.CharField(max_length=64, null=True)
     last_login = models.DateTimeField(null=True)
+
+    def is_authenticated(self, request):
+        return True
