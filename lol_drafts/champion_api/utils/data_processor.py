@@ -17,6 +17,5 @@ def create_match(match_id, data):
             for attr in champion_attributes_to_gather:
                 champion_data.__setattr__(attr, participant.get(attr))
             champion_data.save()
-    match.delete()
     return match
 

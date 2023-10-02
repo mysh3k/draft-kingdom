@@ -27,6 +27,8 @@ urlpatterns = [
     path('oauth2/login/redirect/', AuthDiscordRedirect.as_view(), name='AuthDiscordRedirect'),
     path('auth/user/', login_required(GetAuthenticatedUser.as_view()), name='GetAuthenticatedUser'),
 
-    path('champions-data/', ChampionsData.as_view(), name='ChampionsData'),
+    path('champions-data/', ChampionsJson.as_view(), name='ChampionsData'),
     path('recive-match-data/', ReceiveMatchData.as_view(), name='ReceiveMatchData'),
+    path('champion-avg/<str:champion_name>/', GetAverageChampionStats.as_view(), name='GetAverageChampionStats'),
+
 ]
