@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Match(models.Model):
-    match_id = models.BigIntegerField(primary_key=True)
+    match_str = models.CharField(max_length=64)
     data_version = models.CharField(max_length=16)
 
 

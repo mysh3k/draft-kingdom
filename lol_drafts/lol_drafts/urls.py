@@ -28,4 +28,5 @@ urlpatterns = [
     path('auth/user/', login_required(GetAuthenticatedUser.as_view()), name='GetAuthenticatedUser'),
 
     path('champions-data/', ChampionsData.as_view(), name='ChampionsData'),
+    path('recive-match-data/', ReceiveMatchData.as_view(), name='ReceiveMatchData'),
 ]
