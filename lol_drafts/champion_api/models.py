@@ -10,7 +10,7 @@ class Match(models.Model):
 class ChampionData(models.Model):
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
     puuid = models.CharField(max_length=256)
-    champion = models.CharField(max_length=32)
+    championName = models.CharField(max_length=32)
     win = models.BooleanField()
 
     damageDealtToBuildings = models.IntegerField()
