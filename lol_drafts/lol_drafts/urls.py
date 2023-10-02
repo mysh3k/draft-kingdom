@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 from discord_auth.views import *
+from champion_api.views import *
 #from lol_drafts.discord_auth.views import *
 
 urlpatterns = [
@@ -24,5 +25,7 @@ urlpatterns = [
     path('accounts/login/', AccountLogin.as_view(), name='LoginRequiredRedirect'),
     path('oauth2/login/', AuthDiscord.as_view(), name='AuthDiscord'),
     path('oauth2/login/redirect/', AuthDiscordRedirect.as_view(), name='AuthDiscordRedirect'),
-    path('auth/user/', login_required(GetAuthenticatedUser.as_view()), name='GetAuthenticatedUser')
+    path('auth/user/', login_required(GetAuthenticatedUser.as_view()), name='GetAuthenticatedUser'),
+
+    path('champions-data/', ChampionsData.as_view(), name='ChampionsData'),
 ]

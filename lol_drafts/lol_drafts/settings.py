@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-c_mw-m^@xw+2=w@i67=pbw-dhwzxgo$1he071r)csa9m1wd3h6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTHENTICATION_BACKENDS = [
     'discord_auth.auth.DiscordAuthenticationBackend'
@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'discord_auth.apps.DiscordAuthConfig',
+    'draft_api.apps.DraftApiConfig',
+    'champion_api.apps.ChampionApiConfig',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
