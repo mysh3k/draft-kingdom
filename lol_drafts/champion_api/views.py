@@ -26,5 +26,8 @@ class ReceiveMatchData(View):
 
 class GetAverageChampionStats(View):
     def get(self, request, champion_name):
-        champion_data = ChampionData.objects.filter(championName=champion_name).aggregate(Avg('damageDealtToBuildings'), Avg('magicDamageDealtToChampions'), Avg('physicalDamageDealtToChampions'), Avg('trueDamageDealtToChampions'))
-        return JsonResponse({champion_name: champion_data})
+        champion_data = ChampionData.objects.filter(championName=champion_name)
+        champion_avg = champion_data.aggregate(Avg('damageDealtToBuildings'), Avg('magicDamageDealtToChampions'), Avg('physicalDamageDealtToChampions'), Avg('trueDamageDealtToChampions'))
+        number_of_games = champion_data.count()
+        number_of_wins = champion_data.filter(win=True).count()
+        return JsonResponse({'sample_size': number_of_games, 'wins': number_of_wins, champion_name: champion_avg})
