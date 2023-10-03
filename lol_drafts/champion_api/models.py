@@ -4,8 +4,8 @@ from django.db import models
 # Create your models here.
 class Match(models.Model):
     match_str = models.CharField(max_length=64)
-    data_version = models.CharField(max_length=16)
-    game_length = models.BigIntegerField()
+    data_version = models.CharField(max_length=16, null=True)
+    game_length = models.IntegerField(null=True)
 
 
 class ChampionData(models.Model):

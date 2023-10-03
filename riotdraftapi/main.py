@@ -1,7 +1,7 @@
 import json
 import requests
 
-api_key = 'RGAPI-b11fbdee-a6e5-4a74-91d2-2042ee53d2e5'
+api_key = 'your-api-key'
 
 
 def get_newest_version():
@@ -56,17 +56,22 @@ def get_match_by_id(region: str, matchId: str):
     return response
 
 
+# EUW1, KR, NA1
+# asia, europe, americas
 def feed_backend(region='asia', server='kr'):
+    matches_done = []
     player_list = get_players_in_division(server)
     headers = {'Content-Type': 'application/json'}
     for player in player_list:
         puuid = summonerid_to_puuid(server, player['summonerId'])
         match_history = get_player_history(region, puuid, 50)
         for match in match_history:
-            match_json = get_match_by_id(region, match)
-            requests.post('http://127.0.0.1:8000/recive-match-data/', data=json.dumps(match_json), headers=headers)
-            print(match, 'added.')
+            if match not in matches_done:
+                match_json = get_match_by_id(region, match)
+                requests.post('http://127.0.0.1:8000/recive-match-data/', data=json.dumps(match_json), headers=headers)
+                print(match, 'added.')
+            else:
+                print(match, 'skipped.')
 
 
-feed_backend()
-
+feed_backend('europe', 'euw1')
