@@ -5,6 +5,7 @@ from django.db import models
 class Match(models.Model):
     match_str = models.CharField(max_length=64)
     data_version = models.CharField(max_length=16)
+    game_length = models.BigIntegerField()
 
 
 class ChampionData(models.Model):

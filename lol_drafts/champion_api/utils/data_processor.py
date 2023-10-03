@@ -10,6 +10,7 @@ def create_match(match_id, data):
     match, created = Match.objects.get_or_create(match_str=match_id)
     if created:
         match.data_version = data['info']['gameVersion']
+        match.game_length = data['info']['gameDuration']
         match.save()
         for participant in data['info']['participants']:
             participant.get('win')
