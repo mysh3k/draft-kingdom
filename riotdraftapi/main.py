@@ -56,14 +56,14 @@ def get_match_by_id(region: str, matchId: str):
     return response
 
 
-def feed_backend():
-    player_list = get_players_in_division('kr')
+def feed_backend(region='asia', server='kr'):
+    player_list = get_players_in_division(server)
     headers = {'Content-Type': 'application/json'}
     for player in player_list:
-        puuid = summonerid_to_puuid('kr', player['summonerId'])
-        match_history = get_player_history('asia', puuid, 50)
+        puuid = summonerid_to_puuid(server, player['summonerId'])
+        match_history = get_player_history(region, puuid, 50)
         for match in match_history:
-            match_json = get_match_by_id('asia', match)
+            match_json = get_match_by_id(region, match)
             requests.post('http://127.0.0.1:8000/recive-match-data/', data=json.dumps(match_json), headers=headers)
             print(match, 'added.')
 
