@@ -1,7 +1,16 @@
 import json
 import requests
+import random
+import time
 
-api_key = 'your-api-key'
+api_keys = ['your', 'api', 'keys']
+
+
+def random_key():
+    return random.choice(api_keys)
+
+
+api_key = random_key()
 
 
 def get_newest_version():
@@ -51,7 +60,7 @@ def get_player_history(region: str, puuid: str, count=20):
 
 
 def get_match_by_id(region: str, matchId: str):
-    match_id_endpoint = f'https://{region}.api.riotgames.com/lol/match/v5/matches/{matchId}?api_key={api_key}'
+    match_id_endpoint = f'https://{region}.api.riotgames.com/lol/match/v5/matches/{matchId}?api_key={random_key()}'
     response = requests.get(match_id_endpoint).json()
     return response
 
@@ -64,14 +73,16 @@ def feed_backend(region='asia', server='kr'):
     headers = {'Content-Type': 'application/json'}
     for player in player_list:
         puuid = summonerid_to_puuid(server, player['summonerId'])
-        match_history = get_player_history(region, puuid, 50)
+        match_history = get_player_history(region, puuid, 5)
         for match in match_history:
             if match not in matches_done:
                 match_json = get_match_by_id(region, match)
-                requests.post('http://127.0.0.1:8000/recive-match-data/', data=json.dumps(match_json), headers=headers)
+                requests.post('http://192.168.15.115:8000/recive-match-data/', data=json.dumps(match_json), headers=headers)
+                matches_done.append(match)
+                time.sleep(0.5)
                 print(match, 'added.')
             else:
                 print(match, 'skipped.')
 
 
-feed_backend('europe', 'euw1')
+feed_backend('asia', 'kr')
