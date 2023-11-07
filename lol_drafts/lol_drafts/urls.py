@@ -30,5 +30,6 @@ urlpatterns = [
     path('champions-data/', ChampionsJson.as_view(), name='ChampionsData'),
     path('recive-match-data/', ReceiveMatchData.as_view(), name='ReceiveMatchData'),
     path('champion-avg/<str:champion_name>/', GetAverageChampionStats.as_view(), name='GetAverageChampionStats'),
+    path('team-avg/', GetAverageTeamStats.as_view(), name='GetAverageTeamStats'),
 
 ]
