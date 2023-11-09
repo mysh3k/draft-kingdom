@@ -1,6 +1,7 @@
 from ..models import ChampionData
 from django.db.models import Avg
 
+
 def get_average_champion(champion_name: str) -> dict:
     champion_data = ChampionData.objects.filter(championName__iexact=champion_name)
     champion_avg = champion_data.aggregate(Avg('physicalDamageDealtToChampions'), Avg('magicDamageDealtToChampions'),
@@ -17,5 +18,6 @@ def get_average_champion(champion_name: str) -> dict:
         'champion': champion_name,
         'sample_size': number_of_games,
         'wins': number_of_wins,
-        'stats': champion_avg}
+        'stats': champion_avg
+    }
     return data_to_return

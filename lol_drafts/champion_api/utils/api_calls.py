@@ -1,4 +1,3 @@
-import json
 import requests
 
 
@@ -8,20 +7,5 @@ def get_newest_version():
 
 
 def get_champions():
-    champions_request = requests.get(f'http://ddragon.leagueoflegends.com/cdn/{get_newest_version()}/data/en_US/champion.json').json()
+    champions_request = requests.get(f'https://ddragon.leagueoflegends.com/cdn/{get_newest_version()}/data/en_US/champion.json').json()
     return champions_request
-
-
-def get_champion_icon(champion):
-    url = f'http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/{champion}_0.jpg'
-    return url
-
-
-# champions = get_champions()
-
-# for champion, attributes in champions['data']:
-#     print(champion, champions['data'][champion]['id'], champions['data'][champion]['name'])
-#
-#
-# for champion, attributes in champions['data'].items():
-#     print(champion, attributes['id'], attributes['name'])
