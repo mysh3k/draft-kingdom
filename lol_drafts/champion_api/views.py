@@ -43,13 +43,13 @@ class GetAverageTeamStats(View):
 class GetAverageGameStats(View):
     def post(self, request: HttpRequest) -> JsonResponse:
         data = json.loads(request.body)                             # Get data from POST request
-
-        blue_team = data.get('blue_team', [])                       # Get list of champions in blue team
+        print(data)
+        blue_team = data.get('blueTeam', [])                       # Get list of champions in blue team
         blue_list = list()
         for champion_name in blue_team:
             blue_list.append(get_average_champion(champion_name))
 
-        red_team = data.get('red_team', [])                         # Get list of champions in red team
+        red_team = data.get('redTeam', [])                         # Get list of champions in red team
         red_list = list()
         for champion_name in red_team:
             red_list.append(get_average_champion(champion_name))
