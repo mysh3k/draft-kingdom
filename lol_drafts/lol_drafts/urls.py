@@ -31,5 +31,6 @@ urlpatterns = [
     path('recive-match-data/', ReceiveMatchData.as_view(), name='ReceiveMatchData'),
     path('champion-avg/<str:champion_name>/', GetAverageChampionStats.as_view(), name='GetAverageChampionStats'),
     path('team-avg/', GetAverageTeamStats.as_view(), name='GetAverageTeamStats'),
+    path('game-avg/', GetAverageGameStats.as_view(), name='GetAverageGameStats'),
 
 ]

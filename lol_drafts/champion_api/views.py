@@ -31,10 +31,31 @@ class GetAverageChampionStats(View):
 
 class GetAverageTeamStats(View):
     def post(self, request: HttpRequest) -> JsonResponse:
-        data = json.loads(request.body)
-        team_champions = data.get('team_champions', [])
+        data = json.loads(request.body)                             # Get data from POST request
+        team_champions = data.get('team_champions', [])             # Get list of champions from request
 
         json_list = list()
         for champion_name in team_champions:
             json_list.append(get_average_champion(champion_name))
         return JsonResponse(json_list, safe=False)
+
+
+class GetAverageGameStats(View):
+    def post(self, request: HttpRequest) -> JsonResponse:
+        data = json.loads(request.body)                             # Get data from POST request
+
+        blue_team = data.get('blue_team', [])                       # Get list of champions in blue team
+        blue_list = list()
+        for champion_name in blue_team:
+            blue_list.append(get_average_champion(champion_name))
+
+        red_team = data.get('red_team', [])                         # Get list of champions in red team
+        red_list = list()
+        for champion_name in red_team:
+            red_list.append(get_average_champion(champion_name))
+        # Merge data into dictionary
+        game_dict = {
+            'blue_team': blue_list,
+            'red_team': red_list
+        }
+        return JsonResponse(game_dict, safe=False)
