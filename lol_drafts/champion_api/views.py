@@ -43,13 +43,14 @@ class GetAverageTeamStats(View):
 class GetAverageGameStats(View):
     def post(self, request: HttpRequest) -> JsonResponse:
         data = json.loads(request.body)                             # Get data from POST request
-        print(data)
-        blue_team = data.get('blueTeam', [])                       # Get list of champions in blue team
+        # Get list of champions in blue team, could do Loop with Conditionals to avoid 2 List Comprehensions but I don't think performace will be issue
+        blue_team = [pick for key, pick in data.items() if key.startswith('Blue_pick') and pick is not None]
         blue_list = list()
         for champion_name in blue_team:
             blue_list.append(get_average_champion(champion_name))
 
-        red_team = data.get('redTeam', [])                         # Get list of champions in red team
+        # Get list of champions in red team
+        red_team = [pick for key, pick in data.items() if key.startswith('Red_pick') and pick is not None]
         red_list = list()
         for champion_name in red_team:
             red_list.append(get_average_champion(champion_name))
