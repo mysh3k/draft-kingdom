@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse
 from django.views import View
 from .secrets import auth_discord_url # This should contain your discord auth link

@@ -1,11 +1,9 @@
 import json
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse
+from django.http import HttpRequest, JsonResponse
 from django.views import View
-from django.contrib.auth import authenticate, login
 from rest_framework.authtoken.models import Token
 from .utils.api_calls import get_champions
 from .utils.data_processor import create_match
-from .models import ChampionData
 from .utils.champion_data import get_average_champion
 
 
@@ -43,7 +41,8 @@ class GetAverageTeamStats(View):
 class GetAverageGameStats(View):
     def post(self, request: HttpRequest) -> JsonResponse:
         data = json.loads(request.body)                             # Get data from POST request
-        # Get list of champions in blue team, could do Loop with Conditionals to avoid 2 List Comprehensions but I don't think performace will be issue
+        # Get list of champions in blue team, could do Loop with Conditionals to avoid 2 List Comprehensions,
+        # but I don't think performance will be issue
         blue_team = [pick for key, pick in data.items() if key.startswith('Blue_pick') and pick is not None]
         blue_list = list()
         for champion_name in blue_team:
